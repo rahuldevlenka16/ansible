@@ -1,0 +1,24 @@
+---
+- hosts: all #for all hosts
+  become: true #to run with root privilegde
+  remote_user: ec2-user #as I didn't specify any user in the inventory file
+  tasks:
+    - name: install httpd
+      ansible.builtin.yum: # yum for the ec2 instance
+        name: httpd
+        state: present
+        
+    - name: copy the index file
+      ansible.builtin.copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: '0644'
+    
+    - name: check if the service is started
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
