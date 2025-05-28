@@ -1,0 +1,7 @@
+---
+- hosts: all #for all hosts
+  become: true #to run with root privilegde
+  remote_user: ec2-user #as I didn't specify any user in the inventory file
+  roles:
+    - httpd-role-demo
+

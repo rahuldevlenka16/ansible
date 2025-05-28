@@ -1,0 +1,21 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for httpd-role-demo
+- name: install httpd
+  ansible.builtin.yum: # yum for the ec2 instance
+    name: httpd
+    state: present
+        
+- name: copy the index file
+  ansible.builtin.copy:
+    src: files/index.html #as the html is present in the files folder
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: check if the service is started
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true

@@ -1,3 +1,5 @@
+This playbook will install httpd server on all the servers and copy the html file
+
 running the playbook:
 
 ansible-playbook -i inventory.ini run_playbook.yaml
