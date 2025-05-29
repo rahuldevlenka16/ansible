@@ -1,0 +1,20 @@
+--- 
+- hosts: localhost
+  connection: local
+  vars_files:
+  - group_vars/secret.yml # need to specify the place of the vault file, it cannot find it by default
+  tasks:
+  - name: start an instance with a public IP address
+    amazon.aws.ec2_instance:
+      name: "ansible-created-instance"
+      # key_name: "prod-ssh-key"
+      # vpc_subnet_id: subnet-013744e41e8088axx
+      instance_type: t2.micro
+      security_group: default
+      region: ap-south-1
+      aws_access_key: "{{ec2_access_key}}"  # From vault as defined
+      aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined      
+      network:
+        assign_public_ip: true
+      image_id: ami-0af9569868786b23a
+      
