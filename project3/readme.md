@@ -6,8 +6,7 @@ Prereq:
     § "ansible-galaxy collection install amazon.aws"
 3 create a vault to store the aws IAM user creds to access the AWS
     § store pass in a file: 
-        □ openssl rand -base64 2048 > ~/.vault_pass.txt
-        
+        □ openssl rand -base64 2048 > ~/.vault_pass.txt   
     § pass it to vault and add the access key and secret key: 
         □ ansible-vault create group_vars/secret.yaml --vault-password-file ~/vault_pass.txt
 4 to edit the vault file use : 
